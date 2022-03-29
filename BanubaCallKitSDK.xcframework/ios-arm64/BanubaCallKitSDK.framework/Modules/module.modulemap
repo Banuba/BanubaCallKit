@@ -1,0 +1,11 @@
+framework module BanubaCallKitSDK {
+  umbrella header "BanubaCallKitSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module BanubaCallKitSDK.Swift {
+    header "BanubaCallKitSDK-Swift.h"
+    requires objc
+}

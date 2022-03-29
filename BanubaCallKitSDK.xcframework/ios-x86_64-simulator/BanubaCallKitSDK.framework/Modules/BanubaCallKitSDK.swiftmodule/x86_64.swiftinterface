@@ -1,0 +1,420 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name BanubaCallKitSDK
+import AVFoundation
+import AVFoundation/*.AVAudioSession*/
+import Accelerate
+@_exported import BanubaCallKitSDK
+import BanubaEffectPlayer
+import BanubaEffectPlayer/*.BNBPixelFormat*/
+import CoreVideo
+import Foundation
+import Metal
+import MetalKit
+import OSLog
+import OpenTok
+import QuartzCore/*.MTLPixelFormat*/
+import Swift
+import UIKit
+import _Concurrency
+public struct RoomConnection : Swift.Hashable {
+  public var apiKey: Swift.String
+  public var sessionId: Swift.String
+  public var token: Swift.String
+  public init(apiKey: Swift.String, sessionId: Swift.String, token: Swift.String)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: BanubaCallKitSDK.RoomConnection, b: BanubaCallKitSDK.RoomConnection) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension BanubaCallKitSDK.RoomConnection : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+public struct CameraSettings : Swift.Equatable {
+  public static let `default`: BanubaCallKitSDK.CameraSettings
+  public enum Resolution : Swift.String {
+    case low
+    case medium
+    case hight
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public enum Position : Swift.String {
+    case front
+    case back
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public var resolution: BanubaCallKitSDK.CameraSettings.Resolution
+  public var position: BanubaCallKitSDK.CameraSettings.Position
+  public var isCameraEnabled: Swift.Bool
+  public var isSoundEnabled: Swift.Bool
+  public var uuid: Swift.String?
+  public static func == (a: BanubaCallKitSDK.CameraSettings, b: BanubaCallKitSDK.CameraSettings) -> Swift.Bool
+}
+extension BanubaCallKitSDK.CameraSettings : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+@objc public class CallState : ObjectiveC.NSObject {
+  final public let selectedEffectAsset: BanubaCallKitSDK.EffectAsset?
+  final public let currentUserState: BanubaCallKitSDK.UserState
+  final public let participantStates: [BanubaCallKitSDK.UserState]
+  public init(selectedEffectAsset: BanubaCallKitSDK.EffectAsset?, currentUserState: BanubaCallKitSDK.UserState, participantStates: [BanubaCallKitSDK.UserState])
+  @objc deinit
+}
+@objc public class UserState : ObjectiveC.NSObject {
+  @objc public enum ConnectionState : Swift.Int {
+    case connecting
+    case connected
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  final public let id: Swift.String
+  final public let connectionState: BanubaCallKitSDK.UserState.ConnectionState
+  final public let isCameraEnabled: Swift.Bool
+  final public let isMicEnabled: Swift.Bool
+  final public let isTalking: Swift.Bool
+  final public let isScreenSharing: Swift.Bool
+  public init(id: Swift.String, connectionState: BanubaCallKitSDK.UserState.ConnectionState, isCameraEnabled: Swift.Bool, isMicEnabled: Swift.Bool, isTalking: Swift.Bool, isScreenSharing: Swift.Bool)
+  @objc deinit
+}
+public protocol BanubaCallKitDelegate : AnyObject {
+  func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didChangeCallState callState: BanubaCallKitSDK.CallState)
+  func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didOccurError error: Swift.Error)
+  func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didConnectSessionWithId sessionId: Swift.String)
+  func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didParticipantJoinWithId participantId: Swift.String)
+  func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didParticipantLeftWithId participantId: Swift.String)
+  func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didReceiveSignalWithType signalType: Swift.String?, body: Swift.String?)
+  func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didReceiveStats stats: BanubaCallKitSDK.BanubaCallKit.CallQuality)
+}
+extension BanubaCallKitSDK.BanubaCallKitDelegate {
+  public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didChangeCallState callState: BanubaCallKitSDK.CallState)
+  public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didErrorOccure error: Swift.Error)
+  public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didConnectSessionWithId sessionId: Swift.String)
+  public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didParticipantJoinWithId participantId: Swift.String)
+  public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didParticipantLeftWithId participantId: Swift.String)
+  public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didReceiveSignalWithType signalType: Swift.String?, body: Swift.String?)
+}
+@objc public class BanubaCallKit : ObjectiveC.NSObject {
+  public struct LoggerSettings {
+    public var isRoomGridLayoutEnabled: Swift.Bool
+    public var isRoomConnectionEnabled: Swift.Bool
+    public var isRoomStateEnabled: Swift.Bool
+    public var isCameraEnabled: Swift.Bool
+    public var isFPSEnabled: Swift.Bool
+    public init(isRoomGridLayoutEnabled: Swift.Bool = true, isRoomConnectionEnabled: Swift.Bool = true, isRoomStateEnabled: Swift.Bool = true, isCameraEnabled: Swift.Bool = true, isFPSEnabled: Swift.Bool = false)
+  }
+  public enum Errors : Swift.Error {
+    case invalidSessionParameters
+    public static func == (a: BanubaCallKitSDK.BanubaCallKit.Errors, b: BanubaCallKitSDK.BanubaCallKit.Errors) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var isMicEnabled: Swift.Bool {
+    get
+  }
+  weak public var delegate: BanubaCallKitSDK.BanubaCallKitDelegate?
+  public var settings: BanubaCallKitSDK.CameraSettings {
+    get
+  }
+  public var loggerSettings: BanubaCallKitSDK.BanubaCallKit.LoggerSettings {
+    get
+    set
+  }
+  final public let layout: BanubaCallKitSDK.UsersViewFactory
+  public var isPublishingVideoEnabled: Swift.Bool {
+    get
+    set
+  }
+  public var minAudioLevelForTalkingState: Swift.Float
+  final public let queue: Dispatch.DispatchQueue
+  public init(banubaEffectPlayerToken: Swift.String)
+  @objc deinit
+  public func release()
+  public func connect(_ roomConnection: BanubaCallKitSDK.RoomConnection)
+  public func disconnect()
+  public func updateSettings(_ settings: BanubaCallKitSDK.CameraSettings? = nil)
+  public func broadcastRoomSignal(type: Swift.String?, body: Swift.String?)
+  public func setEffectsManagerEnabled(_ isEnabled: Swift.Bool)
+  public func getCallState() -> BanubaCallKitSDK.CallState?
+}
+extension BanubaCallKitSDK.BanubaCallKit : OpenTok.OTSessionDelegate {
+  @objc dynamic public func sessionDidConnect(_ session: OpenTok.OTSession)
+  @objc dynamic public func sessionDidDisconnect(_ session: OpenTok.OTSession)
+  @objc dynamic public func session(_ session: OpenTok.OTSession, streamCreated stream: OpenTok.OTStream)
+  @objc dynamic public func session(_ session: OpenTok.OTSession, streamDestroyed stream: OpenTok.OTStream)
+  @objc dynamic public func session(_ session: OpenTok.OTSession, didFailWithError error: OpenTok.OTError)
+  @objc dynamic public func session(_ session: OpenTok.OTSession, receivedSignalType type: Swift.String?, from connection: OpenTok.OTConnection?, with string: Swift.String?)
+}
+extension BanubaCallKitSDK.BanubaCallKit : OpenTok.OTPublisherDelegate, OpenTok.OTPublisherKitAudioLevelDelegate {
+  @objc dynamic public func publisher(_ publisher: OpenTok.OTPublisherKit, streamCreated stream: OpenTok.OTStream)
+  @objc dynamic public func publisher(_ publisher: OpenTok.OTPublisherKit, streamDestroyed stream: OpenTok.OTStream)
+  @objc dynamic public func publisher(_ publisher: OpenTok.OTPublisherKit, didFailWithError error: OpenTok.OTError)
+  @objc dynamic public func publisher(_ publisher: OpenTok.OTPublisherKit, audioLevelUpdated audioLevel: Swift.Float)
+}
+extension BanubaCallKitSDK.BanubaCallKit : OpenTok.OTSubscriberKitDelegate, OpenTok.OTSubscriberKitAudioLevelDelegate {
+  @objc dynamic public func subscriberDidConnect(toStream subscriberKit: OpenTok.OTSubscriberKit)
+  @objc dynamic public func subscriberDidDisconnect(fromStream subscriber: OpenTok.OTSubscriberKit)
+  @objc dynamic public func subscriber(_ subscriber: OpenTok.OTSubscriberKit, didFailWithError error: OpenTok.OTError)
+  public func subscriberVideoDataReceived(_ subscriber: OpenTok.OTSubscriber)
+  @objc dynamic public func subscriberVideoEnabled(_ subscriber: OpenTok.OTSubscriberKit, reason: OpenTok.OTSubscriberVideoEventReason)
+  @objc dynamic public func subscriberVideoDisabled(_ subscriber: OpenTok.OTSubscriberKit, reason: OpenTok.OTSubscriberVideoEventReason)
+  @objc dynamic public func subscriber(_ subscriber: OpenTok.OTSubscriberKit, audioLevelUpdated audioLevel: Swift.Float)
+}
+extension BanubaCallKitSDK.BanubaCallKit {
+  public func renderedContentDidChanged(for view: BanubaCallKitSDK.UserView)
+}
+extension BanubaCallKitSDK.BanubaCallKit {
+  public func preloadEffect(_ effectAsset: BanubaCallKitSDK.EffectAsset)
+  public func loadEffect(_ effectAsset: BanubaCallKitSDK.EffectAsset)
+  public func unloadEffect()
+  public func callJsMethod(name: Swift.String, parameters: Swift.String)
+}
+extension BanubaCallKitSDK.BanubaCallKit : OpenTok.OTSubscriberKitNetworkStatsDelegate, OpenTok.OTPublisherKitNetworkStatsDelegate {
+  public struct CallQuality {
+    public enum Source {
+      case audio
+      case video
+      public static func == (a: BanubaCallKitSDK.BanubaCallKit.CallQuality.Source, b: BanubaCallKitSDK.BanubaCallKit.CallQuality.Source) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+    public let source: BanubaCallKitSDK.BanubaCallKit.CallQuality.Source
+    public let id: Swift.String
+    public let packets: Swift.Int
+    public let packetsLost: Swift.Int
+    public let bytes: Swift.Int
+    public let timestamp: Swift.Double
+  }
+  @objc dynamic public func publisher(_ publisher: OpenTok.OTPublisherKit, audioNetworkStatsUpdated stats: [OpenTok.OTPublisherKitAudioNetworkStats])
+  @objc dynamic public func publisher(_ publisher: OpenTok.OTPublisherKit, videoNetworkStatsUpdated stats: [OpenTok.OTPublisherKitVideoNetworkStats])
+  @objc dynamic public func subscriber(_ subscriber: OpenTok.OTSubscriberKit, audioNetworkStatsUpdated stats: OpenTok.OTSubscriberKitAudioNetworkStats)
+  @objc dynamic public func subscriber(_ subscriber: OpenTok.OTSubscriberKit, videoNetworkStatsUpdated stats: OpenTok.OTSubscriberKitVideoNetworkStats)
+}
+@_hasMissingDesignatedInitializers public class Logger {
+  public static var isEnabled: Swift.Bool
+  public static func log(tags: [BanubaCallKitSDK.Logger.Tags] = [], message: Swift.String)
+  public static func log(tags: [BanubaCallKitSDK.Logger.Tags] = [], _ objects: Any...)
+  public static func logTime(tags: [BanubaCallKitSDK.Logger.Tags] = [], message: Swift.String) -> BanubaCallKitSDK.Logger.Defer
+  @objc deinit
+}
+extension BanubaCallKitSDK.Logger {
+  public typealias Defer = () -> Swift.Void
+  public enum Tags : Swift.RawRepresentable, Swift.Hashable {
+    public static var mainCases: [BanubaCallKitSDK.Logger.Tags]
+    case info
+    case warning
+    case error
+    case custom(Swift.String)
+    public var rawValue: Swift.String {
+      get
+    }
+    public var emoji: Swift.String {
+      get
+    }
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+  }
+}
+@_hasMissingDesignatedInitializers public class FPSCalculator {
+  public static var isEnabled: Swift.Bool
+  public static func getFPS() -> Swift.Int
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class UsersViewFactory {
+  public struct Info {
+    public let view: BanubaCallKitSDK.UserView
+    public var flutterInstances: Swift.Int
+    public var audioLevel: Swift.Float
+    public var isScreenSharing: Swift.Bool
+    public var subscriber: OpenTok.OTSubscriber? {
+      get
+      set
+    }
+  }
+  public typealias Key = Swift.String
+  public var users: [BanubaCallKitSDK.UsersViewFactory.Key : BanubaCallKitSDK.UsersViewFactory.Info] {
+    get
+  }
+  public var myView: BanubaCallKitSDK.UserView? {
+    get
+  }
+  public var myAudioLevel: Swift.Float? {
+    get
+  }
+  public func setCurrentUser(_ key: BanubaCallKitSDK.UsersViewFactory.Key?)
+  public func provideAudioLevel(_ value: Swift.Float, for key: BanubaCallKitSDK.UsersViewFactory.Key?)
+  public func newUserExpected(id: BanubaCallKitSDK.UsersViewFactory.Key)
+  public func userViewRemoved(id: BanubaCallKitSDK.UsersViewFactory.Key)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class UserView : MetalKit.MTKView, OpenTok.OTVideoRender {
+  public enum RenderSource {
+    case empty
+    case buffer
+    public static func == (a: BanubaCallKitSDK.UserView.RenderSource, b: BanubaCallKitSDK.UserView.RenderSource) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @_Concurrency.MainActor(unsafe) public static let initialRect: CoreGraphics.CGRect
+  @_Concurrency.MainActor(unsafe) public var isRenderDisabled: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var frameIsRendered: Swift.Bool {
+    get
+  }
+  @objc deinit
+  @_Concurrency.MainActor(unsafe) public func renderEmpty()
+  @_Concurrency.MainActor(unsafe) @objc public func renderVideoFrame(_ frame: OpenTok.OTVideoFrame)
+  @_Concurrency.MainActor(unsafe) public func renderVideoFrame(_ pixelBuffer: CoreVideo.CVPixelBuffer)
+}
+extension BanubaCallKitSDK.UserView : MetalKit.MTKViewDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func mtkView(_ view: MetalKit.MTKView, drawableSizeWillChange size: CoreGraphics.CGSize)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func draw(in view: MetalKit.MTKView)
+}
+public struct EffectAsset : Swift.Equatable {
+  public let url: Foundation.URL
+  public let name: Swift.String
+  public let image: UIKit.UIImage?
+  public init(url: Foundation.URL)
+  public static func == (a: BanubaCallKitSDK.EffectAsset, b: BanubaCallKitSDK.EffectAsset) -> Swift.Bool
+}
+extension Foundation.URL {
+  public static var embeddedEffects: Foundation.URL {
+    get
+  }
+}
+extension AVFAudio.AVAudioSession.RouteChangeReason : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+public enum RoomError : Foundation.LocalizedError {
+  public enum Basic : Swift.Int, Swift.Error {
+    case noInternet
+    case microNotAvalible
+    case cameraNotAvalible
+    case internalError
+    case initializationFailure
+    case internalRoomError
+    case authorizationFailure
+    case connectionFailed
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  case basic(error: BanubaCallKitSDK.RoomError.Basic)
+  case openTokError(code: Swift.Int, name: Swift.String, description: Swift.String)
+  case unknown
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension Swift.Optional {
+  public struct UnexpectedNill : Swift.Error {
+  }
+  public func get() throws -> Wrapped
+}
+public enum VideoQuality : Swift.CaseIterable, Swift.Equatable {
+  case v144p, v288p, v480p, v720p, v1080p
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: BanubaCallKitSDK.VideoQuality, b: BanubaCallKitSDK.VideoQuality) -> Swift.Bool
+  public typealias AllCases = [BanubaCallKitSDK.VideoQuality]
+  public static var allCases: [BanubaCallKitSDK.VideoQuality] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension AVFAudio.AVAudioSession.InterruptionReason : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers public class DefaultAudioDevice : ObjectiveC.NSObject {
+  public static let shared: BanubaCallKitSDK.DefaultAudioDevice
+  public var micIsMuted: Swift.Bool {
+    get
+    set
+  }
+  public var outputIsMuted: Swift.Bool {
+    get
+    set
+  }
+  @objc deinit
+  public func release()
+  public func playShortAudio(_ url: Foundation.URL, isAlert: Swift.Bool = false, completion: (() -> Swift.Void)? = nil)
+  public func playAudio(_ url: Foundation.URL, isLooped: Swift.Bool = false)
+  @objc override dynamic public init()
+}
+extension BanubaCallKitSDK.DefaultAudioDevice : OpenTok.OTAudioDevice {
+  @objc dynamic public func setAudioBus(_ audioBus: OpenTok.OTAudioBus?) -> Swift.Bool
+  @objc dynamic public func captureFormat() -> OpenTok.OTAudioFormat
+  @objc dynamic public func renderFormat() -> OpenTok.OTAudioFormat
+  @objc dynamic public func captureIsAvailable() -> Swift.Bool
+  @objc dynamic public func renderingIsAvailable() -> Swift.Bool
+  @objc dynamic public func captureIsInitialized() -> Swift.Bool
+  @objc dynamic public func renderingIsInitialized() -> Swift.Bool
+  @objc dynamic public func isCapturing() -> Swift.Bool
+  @objc dynamic public func isRendering() -> Swift.Bool
+  @objc dynamic public func estimatedCaptureDelay() -> Swift.UInt16
+  @objc dynamic public func estimatedRenderDelay() -> Swift.UInt16
+  @discardableResult
+  @objc dynamic public func initializeRendering() -> Swift.Bool
+  @discardableResult
+  @objc dynamic public func startRendering() -> Swift.Bool
+  @discardableResult
+  @objc dynamic public func stopRendering() -> Swift.Bool
+  @discardableResult
+  @objc dynamic public func initializeCapture() -> Swift.Bool
+  @discardableResult
+  @objc dynamic public func startCapture() -> Swift.Bool
+  @discardableResult
+  @objc dynamic public func stopCapture() -> Swift.Bool
+}
+extension BanubaCallKitSDK.DefaultAudioDevice {
+  public func setupAudioSession()
+}
+extension Foundation.Bundle {
+  public static let effects: Foundation.Bundle
+}
+extension BanubaCallKitSDK.CameraSettings.Resolution : Swift.Equatable {}
+extension BanubaCallKitSDK.CameraSettings.Resolution : Swift.Hashable {}
+extension BanubaCallKitSDK.CameraSettings.Resolution : Swift.RawRepresentable {}
+extension BanubaCallKitSDK.CameraSettings.Position : Swift.Equatable {}
+extension BanubaCallKitSDK.CameraSettings.Position : Swift.Hashable {}
+extension BanubaCallKitSDK.CameraSettings.Position : Swift.RawRepresentable {}
+extension BanubaCallKitSDK.UserState.ConnectionState : Swift.Equatable {}
+extension BanubaCallKitSDK.UserState.ConnectionState : Swift.Hashable {}
+extension BanubaCallKitSDK.UserState.ConnectionState : Swift.RawRepresentable {}
+extension BanubaCallKitSDK.BanubaCallKit.Errors : Swift.Equatable {}
+extension BanubaCallKitSDK.BanubaCallKit.Errors : Swift.Hashable {}
+extension BanubaCallKitSDK.BanubaCallKit.CallQuality.Source : Swift.Equatable {}
+extension BanubaCallKitSDK.BanubaCallKit.CallQuality.Source : Swift.Hashable {}
+extension BanubaCallKitSDK.UserView.RenderSource : Swift.Equatable {}
+extension BanubaCallKitSDK.UserView.RenderSource : Swift.Hashable {}
+extension BanubaCallKitSDK.RoomError.Basic : Swift.Equatable {}
+extension BanubaCallKitSDK.RoomError.Basic : Swift.Hashable {}
+extension BanubaCallKitSDK.RoomError.Basic : Swift.RawRepresentable {}
+extension BanubaCallKitSDK.VideoQuality : Swift.Hashable {}
