@@ -94,7 +94,7 @@ extension BanubaCallKitSDK.CameraSettings : Swift.CustomStringConvertible {
 }
 public protocol BanubaCallKitDelegate : AnyObject {
   func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didChangeCallState callState: BanubaCallKitSDK.CallState)
-  func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didOccurError error: Swift.Error)
+  func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didOccurError error: BanubaCallKitSDK.RoomError)
   func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didConnectSessionWithId sessionId: Swift.String)
   func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didParticipantJoinWithId participantId: Swift.String)
   func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didParticipantLeftWithId participantId: Swift.String)
@@ -103,7 +103,7 @@ public protocol BanubaCallKitDelegate : AnyObject {
 }
 extension BanubaCallKitSDK.BanubaCallKitDelegate {
   public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didChangeCallState callState: BanubaCallKitSDK.CallState)
-  public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didOccurError error: Swift.Error)
+  public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didOccurError error: BanubaCallKitSDK.RoomError)
   public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didConnectSessionWithId sessionId: Swift.String)
   public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didParticipantJoinWithId participantId: Swift.String)
   public func callKit(_ callKit: BanubaCallKitSDK.BanubaCallKit, didParticipantLeftWithId participantId: Swift.String)
@@ -117,14 +117,6 @@ extension BanubaCallKitSDK.BanubaCallKitDelegate {
     public var isCameraEnabled: Swift.Bool
     public var isFPSEnabled: Swift.Bool
     public init(isRoomGridLayoutEnabled: Swift.Bool = true, isRoomConnectionEnabled: Swift.Bool = true, isRoomStateEnabled: Swift.Bool = true, isCameraEnabled: Swift.Bool = true, isFPSEnabled: Swift.Bool = false)
-  }
-  public enum Errors : Swift.Error {
-    case invalidSessionParameters
-    public static func == (a: BanubaCallKitSDK.BanubaCallKit.Errors, b: BanubaCallKitSDK.BanubaCallKit.Errors) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
   }
   public var isMicEnabled: Swift.Bool {
     get
@@ -318,6 +310,7 @@ public enum RoomError : Foundation.LocalizedError {
     case authorizationFailure
     case connectionFailed
     case connectionDropped
+    case invalidSessionParameters
     public init?(rawValue: Swift.Int)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
@@ -409,8 +402,6 @@ extension BanubaCallKitSDK.CameraSettings.Position : Swift.RawRepresentable {}
 extension BanubaCallKitSDK.UserState.ConnectionState : Swift.Equatable {}
 extension BanubaCallKitSDK.UserState.ConnectionState : Swift.Hashable {}
 extension BanubaCallKitSDK.UserState.ConnectionState : Swift.RawRepresentable {}
-extension BanubaCallKitSDK.BanubaCallKit.Errors : Swift.Equatable {}
-extension BanubaCallKitSDK.BanubaCallKit.Errors : Swift.Hashable {}
 extension BanubaCallKitSDK.BanubaCallKit.CallQuality.Source : Swift.Equatable {}
 extension BanubaCallKitSDK.BanubaCallKit.CallQuality.Source : Swift.Hashable {}
 extension BanubaCallKitSDK.UserView.RenderSource : Swift.Equatable {}
