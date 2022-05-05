@@ -240,19 +240,6 @@ SWIFT_CLASS("_TtC16BanubaCallKitSDK13BanubaCallKit")
 @end
 
 
-@class OTSession;
-@class NSString;
-@class OTConnection;
-
-@interface BanubaCallKit (SWIFT_EXTENSION(BanubaCallKitSDK)) <OTSessionDelegate>
-- (void)sessionDidConnect:(OTSession * _Nonnull)session;
-- (void)sessionDidDisconnect:(OTSession * _Nonnull)session;
-- (void)session:(OTSession * _Nonnull)session streamCreated:(OTStream * _Nonnull)stream;
-- (void)session:(OTSession * _Nonnull)session streamDestroyed:(OTStream * _Nonnull)stream;
-- (void)session:(OTSession * _Nonnull)session didFailWithError:(OTError * _Nonnull)error;
-- (void)session:(OTSession * _Nonnull)session receivedSignalType:(NSString * _Nullable)type fromConnection:(OTConnection * _Nullable)connection withString:(NSString * _Nullable)string;
-@end
-
 @class OTPublisherKitAudioNetworkStats;
 @class OTPublisherKitVideoNetworkStats;
 @class OTSubscriberKit;
@@ -264,6 +251,20 @@ SWIFT_CLASS("_TtC16BanubaCallKitSDK13BanubaCallKit")
 - (void)publisher:(OTPublisherKit * _Nonnull)publisher videoNetworkStatsUpdated:(NSArray<OTPublisherKitVideoNetworkStats *> * _Nonnull)stats;
 - (void)subscriber:(OTSubscriberKit * _Nonnull)subscriber audioNetworkStatsUpdated:(OTSubscriberKitAudioNetworkStats * _Nonnull)stats;
 - (void)subscriber:(OTSubscriberKit * _Nonnull)subscriber videoNetworkStatsUpdated:(OTSubscriberKitVideoNetworkStats * _Nonnull)stats;
+@end
+
+@class OTSession;
+@class OTConnection;
+@class NSString;
+
+@interface BanubaCallKit (SWIFT_EXTENSION(BanubaCallKitSDK)) <OTSessionDelegate>
+- (void)sessionDidConnect:(OTSession * _Nonnull)session;
+- (void)sessionDidDisconnect:(OTSession * _Nonnull)session;
+- (void)session:(OTSession * _Nonnull)session streamCreated:(OTStream * _Nonnull)stream;
+- (void)session:(OTSession * _Nonnull)session streamDestroyed:(OTStream * _Nonnull)stream;
+- (void)session:(OTSession * _Nonnull)session connectionDestroyed:(OTConnection * _Nonnull)connection;
+- (void)session:(OTSession * _Nonnull)session didFailWithError:(OTError * _Nonnull)error;
+- (void)session:(OTSession * _Nonnull)session receivedSignalType:(NSString * _Nullable)type fromConnection:(OTConnection * _Nullable)connection withString:(NSString * _Nullable)string;
 @end
 
 
