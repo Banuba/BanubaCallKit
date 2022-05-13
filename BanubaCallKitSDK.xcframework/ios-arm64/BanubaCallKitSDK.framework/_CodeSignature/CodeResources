@@ -22,15 +22,15 @@
 		</data>
 		<key>Modules/BanubaCallKitSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		XgyiFivwicbayJxNq+zM7ud4IGA=
+		+M7vbBFzRzj80kTNCSPYg5Z79d0=
 		</data>
 		<key>Modules/BanubaCallKitSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		PUsQhx71QDl8gWgcwl14IVM5Mz4=
+		LT8slr3qQclNFhluX7t1ucNeHJ0=
 		</data>
 		<key>Modules/BanubaCallKitSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		/bvVeSuvOukQcuoXt4MxxJHOc5c=
+		rZLTvd2xRoLfXbdbzpYZKXoZj9k=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -68,21 +68,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			vYdjQyquqYbB4tWrk9sJfRBGRhivZTeK3xYDvzIiics=
+			4+eZVH0yz1+6Zx/qqu6FKRGzvG9KEI/Jk4MR6AK/zlg=
 			</data>
 		</dict>
 		<key>Modules/BanubaCallKitSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Y1IaPndTRIC4t160PSUPFdEXiQweSr+MKH4YoTv0QPM=
+			a6qtIOfWzTLnkVPcLvZPSL4nRlKNdwggKnRvQ1qOMa0=
 			</data>
 		</dict>
 		<key>Modules/BanubaCallKitSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			MTdZDGcZ1P1fsOJoNF71XyUFuoxTezl7Ncu56q25bnk=
+			532j940nB2Crtj7XXRJyNGsGYUoQykTK3J7dcodSXN8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

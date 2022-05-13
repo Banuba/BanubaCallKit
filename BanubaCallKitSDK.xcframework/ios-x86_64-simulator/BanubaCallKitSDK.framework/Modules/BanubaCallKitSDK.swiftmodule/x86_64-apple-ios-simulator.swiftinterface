@@ -81,13 +81,23 @@ extension BanubaCallKitSDK.CameraSettings : Swift.CustomStringConvertible {
       get
     }
   }
+  public enum CameraState : Swift.String {
+    case initialization
+    case enabled
+    case disabled
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
   final public let id: Swift.String
   final public let connectionState: BanubaCallKitSDK.UserState.ConnectionState
-  final public let isCameraEnabled: Swift.Bool
+  final public let cameraState: BanubaCallKitSDK.UserState.CameraState
   final public let isMicEnabled: Swift.Bool
   final public let isTalking: Swift.Bool
   final public let isScreenSharing: Swift.Bool
-  public init(id: Swift.String, connectionState: BanubaCallKitSDK.UserState.ConnectionState, isCameraEnabled: Swift.Bool, isMicEnabled: Swift.Bool, isTalking: Swift.Bool, isScreenSharing: Swift.Bool)
+  public init(id: Swift.String, connectionState: BanubaCallKitSDK.UserState.ConnectionState, cameraState: BanubaCallKitSDK.UserState.CameraState, isMicEnabled: Swift.Bool, isTalking: Swift.Bool, isScreenSharing: Swift.Bool)
   @objc deinit
 }
 public protocol BanubaCallKitDelegate : AnyObject {
@@ -406,6 +416,9 @@ extension BanubaCallKitSDK.CameraSettings.Position : Swift.RawRepresentable {}
 extension BanubaCallKitSDK.UserState.ConnectionState : Swift.Equatable {}
 extension BanubaCallKitSDK.UserState.ConnectionState : Swift.Hashable {}
 extension BanubaCallKitSDK.UserState.ConnectionState : Swift.RawRepresentable {}
+extension BanubaCallKitSDK.UserState.CameraState : Swift.Equatable {}
+extension BanubaCallKitSDK.UserState.CameraState : Swift.Hashable {}
+extension BanubaCallKitSDK.UserState.CameraState : Swift.RawRepresentable {}
 extension BanubaCallKitSDK.BanubaCallKit.CallQuality.Source : Swift.Equatable {}
 extension BanubaCallKitSDK.BanubaCallKit.CallQuality.Source : Swift.Hashable {}
 extension BanubaCallKitSDK.UserView.RenderSource : Swift.Equatable {}
