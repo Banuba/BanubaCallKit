@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BanubaCallKitSDK-Swift.h</key>
 		<data>
-		QcsuQsGlmeiUpA4PZCH8pefsvZk=
+		I5HwrW2VgpwwZRxbae4m9XqjMwc=
 		</data>
 		<key>Headers/BanubaCallKitSDK.h</key>
 		<data>
@@ -22,15 +22,15 @@
 		</data>
 		<key>Modules/BanubaCallKitSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		+M7vbBFzRzj80kTNCSPYg5Z79d0=
+		8uvxfNbSZI0bKAJ6z4TTDkd7hvg=
 		</data>
 		<key>Modules/BanubaCallKitSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		LT8slr3qQclNFhluX7t1ucNeHJ0=
+		OJiBeKS5PBhGNsczKSX+M9pXDgE=
 		</data>
 		<key>Modules/BanubaCallKitSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		rZLTvd2xRoLfXbdbzpYZKXoZj9k=
+		+tl4WCBQWIxshwKuxIoiJDrWhdg=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -47,7 +47,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			77MAoElakWoWCwJHmnyQQ4UL0NJLpY31nktInS40jfU=
+			Bqus8IXWJ/igdM7x4e6JTdH7bYLrnQrnz1CWFRP9S18=
 			</data>
 		</dict>
 		<key>Headers/BanubaCallKitSDK.h</key>
@@ -68,21 +68,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4+eZVH0yz1+6Zx/qqu6FKRGzvG9KEI/Jk4MR6AK/zlg=
+			0+8RpU5wdCNYx9rb9nkc10OqJ3CqYZFQCs5la/SFLko=
 			</data>
 		</dict>
 		<key>Modules/BanubaCallKitSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			a6qtIOfWzTLnkVPcLvZPSL4nRlKNdwggKnRvQ1qOMa0=
+			xDikwL6O/dT5u16Z1RdllDhgKMBmgBMLeUOgJbxJmag=
 			</data>
 		</dict>
 		<key>Modules/BanubaCallKitSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			532j940nB2Crtj7XXRJyNGsGYUoQykTK3J7dcodSXN8=
+			YeYoPkMLG5T8pULICOxxKSeS1tDBTOn+pzixG4GEXgQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

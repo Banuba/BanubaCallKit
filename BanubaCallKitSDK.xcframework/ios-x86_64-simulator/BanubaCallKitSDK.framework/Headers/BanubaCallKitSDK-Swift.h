@@ -228,6 +228,7 @@ SWIFT_CLASS("_TtC16BanubaCallKitSDK13BanubaCallKit")
 
 
 
+
 @class OTPublisherKit;
 @class OTStream;
 @class OTError;
@@ -238,7 +239,6 @@ SWIFT_CLASS("_TtC16BanubaCallKitSDK13BanubaCallKit")
 - (void)publisher:(OTPublisherKit * _Nonnull)publisher didFailWithError:(OTError * _Nonnull)error;
 - (void)publisher:(OTPublisherKit * _Nonnull)publisher audioLevelUpdated:(float)audioLevel;
 @end
-
 
 @class OTPublisherKitAudioNetworkStats;
 @class OTPublisherKitVideoNetworkStats;

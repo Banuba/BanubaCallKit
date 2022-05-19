@@ -122,11 +122,10 @@ extension BanubaCallKitSDK.BanubaCallKitDelegate {
 @objc public class BanubaCallKit : ObjectiveC.NSObject {
   public struct LoggerSettings {
     public var isRoomGridLayoutEnabled: Swift.Bool
-    public var isRoomConnectionEnabled: Swift.Bool
     public var isRoomStateEnabled: Swift.Bool
     public var isCameraEnabled: Swift.Bool
     public var isFPSEnabled: Swift.Bool
-    public init(isRoomGridLayoutEnabled: Swift.Bool = true, isRoomConnectionEnabled: Swift.Bool = true, isRoomStateEnabled: Swift.Bool = true, isCameraEnabled: Swift.Bool = true, isFPSEnabled: Swift.Bool = false)
+    public init(isRoomGridLayoutEnabled: Swift.Bool = true, isRoomStateEnabled: Swift.Bool = true, isCameraEnabled: Swift.Bool = true, isFPSEnabled: Swift.Bool = false)
   }
   public var isMicEnabled: Swift.Bool {
     get
